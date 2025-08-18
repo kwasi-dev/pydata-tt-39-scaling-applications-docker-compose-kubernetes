@@ -1,3 +1,4 @@
+aiosqlite
 asyncpg
 fastapi[asyncio]
 fastapi-health
@@ -6,6 +7,7 @@ pydantic[email]
 pydantic-extra-types 
 pydantic-settings
 python-jose
+python-multipart
 sqlmodel
 typer
 uvicorn[standard]
