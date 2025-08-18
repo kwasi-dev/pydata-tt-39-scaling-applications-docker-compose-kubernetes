@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     debug: bool 
     enable_metrics:bool
     secret_key:str
-
+    algorithm:str
+    access_token_expire_minutes:str
     
     model_config = SettingsConfigDict(env_file=".env")

@@ -8,6 +8,7 @@ passlib
 pydantic[email]
 pydantic-extra-types 
 pydantic-settings
+pyjwt
 python-jose
 python-multipart
 sqlmodel

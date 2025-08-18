@@ -1,2 +1,2 @@
 from .flash import *
-from .password import *
+from .auth import *
