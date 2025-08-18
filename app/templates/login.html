@@ -14,10 +14,26 @@
     <main class="form-signin w-100 m-auto">
         <form>
             <h1 class="h3 mb-3 fw-normal text-center">My Todo App</h1>
+
+            {% if messages %}
+            {% for message in messages %}
+            {% if message[1] == "error"%}
+            <div class="alert alert-danger" role="alert">
+                {{ message[0] }}
+            </div>
+            {% else %}
+            <div class="alert alert-success" role="alert">
+                {{ message[0] }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+
             <div class="form-floating"> <input type="email" class="form-control" id="floatingInput"
                     placeholder="name@example.com"> <label for="floatingInput">Email address</label> </div>
-            <div class="form-floating"> <input type="password" class="form-control" id=" "
-                    placeholder="Password"> <label for="floatingPassword">Password</label> </div>
+            <div class="form-floating"> <input type="password" class="form-control" id=" " placeholder="Password">
+                <label for="floatingPassword">Password</label> </div>
             <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
         </form>
     </main>

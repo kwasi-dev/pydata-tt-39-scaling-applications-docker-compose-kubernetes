@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Todo App</title>
+    <title>Register - Todo App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link href="static/css/sign-in.css" rel="stylesheet">
@@ -14,14 +14,31 @@
     <main class="form-signin w-100 m-auto">
         <form method="post">
             <h1 class="h3 mb-3 fw-normal text-center">My Todo App</h1>
+
+            {% if messages %}
+            {% for message in messages %}
+            {% if message[1] == "error"%}
+            <div class="alert alert-danger" role="alert">
+                {{ message[0] }}
+            </div>
+            {% else %}
+            <div class="alert alert-success" role="alert">
+                {{ message[0] }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+
             <div class="form-floating my-2"> <input type="text" name="name" class="form-control" id="nameInput"
                     placeholder="John Doe"> <label for="nameInput">Full Name</label> </div>
             <div class="form-floating my-2"> <input type="email" name="email" class="form-control" id="floatingInput"
                     placeholder="name@example.com"> <label for="floatingInput">Email address</label> </div>
-            <div class="form-floating my-2"> <input name="password" type="password" class="form-control" id="floatingPassword"
-                    placeholder="Password"> <label for="floatingPassword">Password</label> </div>
-            <div class="form-floating my-2"> <input name="password_confirm" type="password" class="form-control" id="floatingPasswordConfirm"
-                    placeholder="Confirm Password"> <label for="floatingPasswordConfirm">Confirm Password</label> </div>
+            <div class="form-floating my-2"> <input name="password" type="password" class="form-control"
+                    id="floatingPassword" placeholder="Password"> <label for="floatingPassword">Password</label> </div>
+            <div class="form-floating my-2"> <input name="password_confirm" type="password" class="form-control"
+                    id="floatingPasswordConfirm" placeholder="Confirm Password"> <label
+                    for="floatingPasswordConfirm">Confirm Password</label> </div>
             <button class="btn btn-primary w-100 py-2 my-4" type="submit">Sign in</button>
         </form>
     </main>
