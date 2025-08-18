@@ -1,0 +1,10 @@
+asyncpg
+fastapi[asyncio]
+fastapi-health
+pydantic[email]
+pydantic-extra-types 
+pydantic-settings
+python-jose
+sqlmodel
+typer
+uvicorn[standard]
