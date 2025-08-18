@@ -40,7 +40,5 @@ async def login_action(request: Request,  form_data: Annotated[OAuth2PasswordReq
     token = create_access_token({"sub": user.email})
     response.set_cookie("access_token", token, httponly=True, secure=True, samesite="strict",path="/")
 
-    print(token)
-
     return response
 
