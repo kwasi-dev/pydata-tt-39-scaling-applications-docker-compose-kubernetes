@@ -1,6 +1,7 @@
 asyncpg
 fastapi[asyncio]
 fastapi-health
+jinja2
 pydantic[email]
 pydantic-extra-types 
 pydantic-settings
