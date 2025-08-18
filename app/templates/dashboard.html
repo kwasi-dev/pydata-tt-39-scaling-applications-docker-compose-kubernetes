@@ -16,8 +16,9 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <a class="navbar-brand" href="#">Todo App</a>
     <div class="collapse navbar-collapse">
-      <form class="d-flex me-auto ">
-        <input class="form-control me-2" name="search" type="search" placeholder="Search todos" aria-label="Search">
+      <form class="d-flex me-auto " id="searchForm">
+        <input class="form-control me-2" name="search" type="search" id="searchInput" placeholder="Search todos"
+          value="{{search if search else ''}}" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">
           <i class="fa fa-search"></i>
         </button>
@@ -67,7 +68,8 @@
         data-todo-id="{{item.id}}">
         <span>{{item.content}}</span>
         <div>
-          <button class="btn btn-sm btn-success me-2" onclick="toggleComplete(this)">{{'Uncomplete' if item.is_complete else 'Complete'}}</button>
+          <button class="btn btn-sm btn-success me-2" onclick="toggleComplete(this)">{{'Uncomplete' if item.is_complete
+            else 'Complete'}}</button>
           <button class="btn btn-sm btn-danger" onclick="deleteTodo(this)">Delete</button>
         </div>
       </li>
@@ -104,6 +106,17 @@
     crossorigin="anonymous"></script>
 
   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const searchInput = document.getElementById('searchInput');
+      const searchForm = document.getElementById('searchForm');
+
+      searchInput.addEventListener('input', function () {
+        if (this.value === '') {
+          searchForm.submit();
+        }
+      });
+    });
+
     async function toggleComplete(button) {
       const li = button.closest("li");
       const todoId = li.dataset.todoId;

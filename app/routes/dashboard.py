@@ -12,13 +12,16 @@ from typing import Annotated
 
 
 @root_router.get("/dashboard", response_class=HTMLResponse)
-async def dashboard_view(request: Request, user: Annotated[str, Depends(get_current_user)], session: AsyncSession = Depends(get_session),):
-    user_todos = (await session.exec(
-        select(TodoItem).where(TodoItem.user_id == user.id).order_by(desc(TodoItem.id))
-    )).all()
+async def dashboard_view(request: Request, user: Annotated[str, Depends(get_current_user)], session: AsyncSession = Depends(get_session), search: str|None = None):
+    
+    qry = select(TodoItem).where(TodoItem.user_id == user.id)
+    
+    if search:
+        qry = qry.where(TodoItem.content.ilike(f"%{search}%"))
 
+    user_todos = (await session.exec(qry.order_by(desc(TodoItem.id)))).all()
 
     return templates.TemplateResponse(
         "dashboard.html",
-        {"request": request, "messages": get_flashed_messages(request), "user": user, "todo_items": user_todos}
+        {"request": request, "messages": get_flashed_messages(request), "user": user, "todo_items": user_todos, "search": search}
     )
