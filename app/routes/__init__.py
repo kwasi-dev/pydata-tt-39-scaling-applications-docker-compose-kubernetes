@@ -10,4 +10,5 @@ templates = Jinja2Templates(directory=TEMPLATE_PATH)
 root_router = APIRouter()
 
 from .login import *
+from .register import *
 
