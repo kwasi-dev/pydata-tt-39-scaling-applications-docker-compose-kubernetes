@@ -13,3 +13,4 @@ from .login import *
 from .register import *
 from .dashboard import *
 from .todo import *
+from .logout import *

@@ -12,7 +12,7 @@ from app.settings import get_settings
 from app.database import get_session
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlmodel import select
-from app.models import User
+from app.models import User, TokenBlacklist
 from fastapi import Request, Form, Depends, status
 
 
@@ -53,10 +53,19 @@ async def get_current_user(request: Request, session: Annotated[AsyncSession, De
     except InvalidTokenError:
         raise credentials_exception
     
+    blacklist_token = (await session.exec(
+        select(TokenBlacklist).where(TokenBlacklist.token == token)
+    )).one_or_none()
+
+    if blacklist_token:
+        raise credentials_exception
+    
     user = (await session.exec(
         select(User).where(User.email == payload['sub'])
     )).one_or_none()
         
     if user is None:
         raise credentials_exception
+    
     return user
+
