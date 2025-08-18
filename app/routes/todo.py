@@ -21,6 +21,7 @@ async def create_todo_action(request: Request, user: Annotated[str, Depends(get_
         )
         session.add(user)
         await session.commit()
+        flash(request, f"Item successfully created", "success")
     except Exception as e:
         flash(request, f"An error has occurred {e}")
     
