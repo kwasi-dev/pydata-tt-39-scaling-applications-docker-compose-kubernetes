@@ -52,6 +52,28 @@ async def update_todo_completeness_action(item_id: int, todo_complete:TodoComple
             status_code=status.HTTP_303_SEE_OTHER,
         )
 
+
+@root_router.delete("/todo/{item_id}", response_class=RedirectResponse)
+async def delete_todo_action(item_id: int, request: Request, user: Annotated[str, Depends(get_current_user)], session: AsyncSession = Depends(get_session),):
+    try:
+        user_todo = (await session.exec(
+            select(TodoItem).where(TodoItem.user_id == user.id, TodoItem.id == item_id)
+        )).one_or_none()
+           
+        if not user_todo:
+            flash(request, "Item not found")
+        else:
+            await session.delete(user_todo)
+            await session.commit()
+            flash(request, f"Item successfully deleted", "success")
+    except Exception as e:
+        flash(request, f"An error has occurred {e}")
+    finally:
+        return RedirectResponse(
+            request.url_for("dashboard_view"),
+            status_code=status.HTTP_303_SEE_OTHER,
+        )
+
     
     
 
