@@ -2,7 +2,9 @@ aiosqlite
 asyncpg
 fastapi[asyncio]
 fastapi-health
+itsdangerous
 jinja2
+passlib
 pydantic[email]
 pydantic-extra-types 
 pydantic-settings
