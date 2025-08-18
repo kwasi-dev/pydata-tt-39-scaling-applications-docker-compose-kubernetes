@@ -10,6 +10,13 @@ from app.utilities import flash, verify_password, get_flashed_messages, create_a
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from typing import Annotated, Union
 
+@root_router.get("/", response_class=RedirectResponse)
+async def root_redirect_login(request: Request):
+    return RedirectResponse(
+            request.url_for("login_view"),
+            status_code=status.HTTP_303_SEE_OTHER,
+        )
+
 
 @root_router.get("/login", response_class=HTMLResponse)
 async def login_view(request: Request):
