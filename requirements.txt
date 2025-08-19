@@ -4,6 +4,7 @@ fastapi[asyncio]
 fastapi-health
 itsdangerous
 jinja2
+locust
 passlib
 pydantic[email]
 pydantic-extra-types 
