@@ -45,7 +45,7 @@ async def login_action(request: Request,  form_data: Annotated[OAuth2PasswordReq
             status_code=status.HTTP_303_SEE_OTHER,
         )
     token = create_access_token({"sub": user.email})
-    response.set_cookie("access_token", token, httponly=True, secure=True, samesite="strict",path="/")
+    response.set_cookie("access_token", token, httponly=False, secure=False, samesite="strict",path="/")
 
     return response
 
