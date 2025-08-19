@@ -12,5 +12,9 @@ class Settings(BaseSettings):
     secret_key:str
     algorithm:str
     access_token_expire_minutes:str
-    
+    pool_size:int
+    max_overflow:int
+    pool_timeout:int
+    pool_recycle:int
+
     model_config = SettingsConfigDict(env_file=".env")
